@@ -1,6 +1,6 @@
 "use client";
 
-import Link from 'next/link'
+import Link from "next/link";
 import {
   Menubar,
   MenubarContent,
@@ -10,28 +10,40 @@ import {
 } from "@/components/ui/menubar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Menu } from "lucide-react";
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export function Header() {
+const Header = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
   const menuItems = [
     { label: "Home", href: "/", submenu: [] },
-    { label: "Manage Book", href: "#", submenu: [
-      { label: "Add Book", href: "#" },
-      { label: "View Books", href: "/books" },
-    ]},
-    { label: "Manage User", href: "#", submenu: [
-      { label: "Add User", href: "#" },
-      { label: "View User", href: "#" },
-    ]},
-    { label: "Borrowed Book", href: "#", submenu: [
-      { label: "View Borrowed Books", href: "#" },
-      { label: "Return Book", href: "#" },
-    ]},
+    {
+      label: "Manage Book",
+      href: "#",
+      submenu: [
+        { label: "Add Book", href: "/books/create" },
+        { label: "View Books", href: "/books" },
+      ],
+    },
+    {
+      label: "Manage User",
+      href: "#",
+      submenu: [
+        { label: "Add User", href: "#" },
+        { label: "View User", href: "#" },
+      ],
+    },
+    {
+      label: "Borrowed Book",
+      href: "#",
+      submenu: [
+        { label: "View Borrowed Books", href: "#" },
+        { label: "Return Book", href: "#" },
+      ],
+    },
   ];
 
   const handleMenuClick = (index: number, href: string) => {
@@ -59,7 +71,7 @@ export function Header() {
           </h1>
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            <button 
+            <button
               className="sm:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -68,11 +80,15 @@ export function Header() {
           </div>
         </div>
 
-        <div className={`sm:block ${isMenuOpen ? 'block' : 'hidden'} bg-background`}>
+        <div
+          className={`sm:block ${
+            isMenuOpen ? "block" : "hidden"
+          } bg-background`}
+        >
           <Menubar className="flex flex-col sm:flex-row bg-background">
             {menuItems.map((item, index) => (
               <MenubarMenu key={index}>
-                <MenubarTrigger 
+                <MenubarTrigger
                   className="justify-start sm:justify-center w-full text-left sm:text-center hover:bg-accent"
                   onClick={() => handleMenuClick(index, item.href)}
                 >
@@ -81,8 +97,17 @@ export function Header() {
                 {openMenuIndex === index && item.submenu.length > 0 && (
                   <MenubarContent className="bg-background">
                     {item.submenu.map((subItem, subIndex) => (
-                      <MenubarItem key={subIndex} className="w-full hover:bg-accent">
-                        <Link href={subItem.href} className="w-full block py-2" onClick={handleItemClick}>{subItem.label}</Link>
+                      <MenubarItem
+                        key={subIndex}
+                        className="w-full hover:bg-accent"
+                      >
+                        <Link
+                          href={subItem.href}
+                          className="w-full block py-2"
+                          onClick={handleItemClick}
+                        >
+                          {subItem.label}
+                        </Link>
                       </MenubarItem>
                     ))}
                   </MenubarContent>
@@ -94,4 +119,6 @@ export function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

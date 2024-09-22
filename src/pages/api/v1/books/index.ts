@@ -3,20 +3,9 @@ import { toCamelCase } from "@/shared/utils/to-camel-case.util";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 import { PrismaClient } from '@prisma/client'
+import { Book } from "@/shared/types/book.type";
 
 const prisma = new PrismaClient()
-
-type Book = {
-  id: string;
-  title: string;
-  author: string;
-  description: string;
-  imageUrl: string;
-  genre: string;
-  releaseDate: Date;
-  createdAt: Date;
-  updatedAt: Date;
-};
 
 const createBookSchema = z.object({
   title: z.string().min(1, "Title is required"),
