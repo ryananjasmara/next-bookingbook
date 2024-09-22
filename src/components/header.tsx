@@ -22,7 +22,7 @@ export function Header() {
     { label: "Home", href: "/", submenu: [] },
     { label: "Manage Book", href: "#", submenu: [
       { label: "Add Book", href: "#" },
-      { label: "View Books", href: "/books/list" },
+      { label: "View Books", href: "/books" },
     ]},
     { label: "Manage User", href: "#", submenu: [
       { label: "Add User", href: "#" },
