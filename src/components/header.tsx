@@ -40,8 +40,8 @@ const Header = () => {
       label: "Borrowed Book",
       href: "#",
       submenu: [
-        { label: "View Borrowed Books", href: "#" },
         { label: "Return Book", href: "#" },
+        { label: "View Borrowed Books", href: "#" },
       ],
     },
   ];

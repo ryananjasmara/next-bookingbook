@@ -46,26 +46,33 @@ const BookDetailPage = async ({ params }: { params: { id: string } }) => {
           <CardTitle>Book Details</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="font-semibold">Author:</p>
-              <p>{book.author}</p>
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="space-y-4 flex-1">
+              <div>
+                <p className="font-semibold">Author:</p>
+                <p>{book.author}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Genre:</p>
+                <Badge>{book.genre}</Badge>
+              </div>
+              <div>
+                <p className="font-semibold">Release Date:</p>
+                <p>{new Date(book.release_date).toLocaleDateString()}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Description:</p>
+                <p>{book.description}</p>
+              </div>
             </div>
-            <div>
-              <p className="font-semibold">Genre:</p>
-              <Badge>{book.genre}</Badge>
-            </div>
-            <div>
-              <p className="font-semibold">Release Date:</p>
-              <p>{new Date(book.release_date).toLocaleDateString()}</p>
-            </div>
-            <div>
-              <p className="font-semibold">Image:</p>
-              <Image src={book.image_url} alt={book.title} width={128} height={128} className="w-32 h-auto" />
-            </div>
-            <div className="col-span-2">
-              <p className="font-semibold">Description:</p>
-              <p>{book.description}</p>
+            <div className="flex-1">
+              <Image 
+                src={book.image_url} 
+                alt={book.title} 
+                width={200} 
+                height={300} 
+                className="object-cover rounded-lg"
+              />
             </div>
           </div>
         </CardContent>

@@ -16,8 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { useTransition } from 'react';
-import { deleteBook } from '@/app/actions/delete-book';
+import { deleteBook } from "@/app/actions/delete-book";
 
 interface BookTableProps {
   books: Book[];
@@ -26,7 +25,6 @@ interface BookTableProps {
 export const BookTable = ({ books }: BookTableProps) => {
   const router = useRouter();
   const [openDialogId, setOpenDialogId] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
 
   const columns: ColumnDef<Book>[] = [
     {
@@ -91,30 +89,41 @@ export const BookTable = ({ books }: BookTableProps) => {
             >
               Edit
             </Button>
-            <Dialog open={openDialogId === book.id} onOpenChange={(open) => setOpenDialogId(open ? book.id : null)}>
+            <Dialog
+              open={openDialogId === book.id}
+              onOpenChange={(open) => setOpenDialogId(open ? book.id : null)}
+            >
               <DialogTrigger asChild>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                >
+                <Button variant="destructive" size="sm">
                   Delete
                 </Button>
               </DialogTrigger>
-              <DialogContent 
-                onClick={(e) => e.stopPropagation()} 
+              <DialogContent
+                onClick={(e) => e.stopPropagation()}
                 className="max-w-sm mx-auto p-4 sm:p-6 rounded-lg"
               >
                 <DialogHeader>
-                  <DialogTitle className="text-lg font-medium">Are you sure?</DialogTitle>
+                  <DialogTitle className="text-lg font-medium">
+                    Are you sure?
+                  </DialogTitle>
                   <DialogDescription>
-                    This action cannot be undone. This will permanently delete the book.
+                    This action cannot be undone. This will permanently delete
+                    the book.
                   </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-0 mt-4 sm:mt-0">
-                  <Button variant="outline" onClick={() => setOpenDialogId(null)} className="w-full sm:w-auto">
+                  <Button
+                    variant="outline"
+                    onClick={() => setOpenDialogId(null)}
+                    className="w-full sm:w-auto"
+                  >
                     Cancel
                   </Button>
-                  <Button variant="destructive" onClick={() => handleDelete(book.id)} className="w-full sm:w-auto">
+                  <Button
+                    variant="destructive"
+                    onClick={() => handleDelete(book.id)}
+                    className="w-full sm:w-auto"
+                  >
                     Delete
                   </Button>
                 </DialogFooter>
@@ -131,14 +140,7 @@ export const BookTable = ({ books }: BookTableProps) => {
   };
 
   const handleDelete = async (id: string) => {
-    startTransition(async () => {
-      const result = await deleteBook(id);
-      if (result.success) {
-        // Optionally update local state or show a success message
-      } else {
-        // Handle error, maybe show an error message
-      }
-    });
+    await deleteBook(id);
     setOpenDialogId(null);
   };
 

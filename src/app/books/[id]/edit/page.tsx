@@ -92,7 +92,7 @@ export default async function BookEditPage({
         </BreadcrumbList>
       </Breadcrumb>
 
-      <h1 className="text-2xl font-bold mt-4 mb-6">Edit Book</h1>
+      <h1 className="text-2xl font-bold mt-4 mb-6">{book.title}</h1>
 
       <form action={updateBook.bind(null, book.id)} className="space-y-4">
         <div>

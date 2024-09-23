@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { BookTable } from "./__partials/Table";
+import { BookTable } from "./__partials/table";
 
 async function getBooks() {
   return await prisma.book.findMany();
